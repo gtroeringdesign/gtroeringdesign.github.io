@@ -89,7 +89,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
     linear-gradient(to top, var(--shade) 0%, rgba(22, 21, 19, 0.45) 42%, rgba(22, 21, 19, 0.1) 70%),
-    linear-gradient(to left, rgba(22, 21, 19, 0.55) 0%, rgba(22, 21, 19, 0) 40%);
+    linear-gradient(to left, rgba(22, 21, 19, 0.55) 0%, rgba(22, 21, 19, 0) 40%),
+    linear-gradient(to bottom, rgba(22, 21, 19, 0.6) 0%, rgba(22, 21, 19, 0) 38%);
 }
 .hero-content {
   position: absolute; z-index: 2; left: 0; right: 0; bottom: 0;
@@ -113,6 +114,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 .steps li.on { color: var(--on-dark); -webkit-text-stroke-color: var(--on-dark); }
 .steps li.on i { color: var(--signal); }
 .steps li .arrow { font-weight: 300; -webkit-text-stroke: 0; color: var(--signal); opacity: 0; transition: opacity 0.35s; }
+.steps li .arrow { display: inline-flex; align-self: center; }
+.steps li .arrow svg { width: 0.5em; height: 0.5em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: square; stroke-linejoin: miter; overflow: visible; }
 .steps li.on .arrow { opacity: 1; }
 
 .hero-detail {

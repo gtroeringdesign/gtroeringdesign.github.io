@@ -41,15 +41,15 @@
   <section class="hero" id="process" aria-label="How I work">
     <div class="hero-stage">
       <div class="hero-frame">
-        <img class="hero-img on" src="img/bloc11-shell.jpg" alt="The empty retail shell at Bloc 11 Fourways with the first plywood wall faces going up" width="1599" height="832" fetchpriority="high">
-        <img class="hero-img" src="img/bloc11-cad.jpg" alt="CAD model of the wall structure: red plywood spines with access holes behind perforated wall faces" width="1600" height="900">
-        <img class="hero-img" src="img/hero-cad-overlay.jpg" alt="The CAD model of the wall structure overlaid on a photo of the built wall" width="2398" height="1188">
-        <img class="hero-img" src="img/bloc11-wall.jpg" alt="Finished grey and orange bouldering walls at Bloc 11 Fourways with matting being laid" width="1600" height="1200">
+        <img class="hero-img on" src="img/intro-01-concept.jpg" alt="Concept model of the Bloc 11 Fourways hall: orange wall structures over blue matting, with figures for scale" width="2560" height="1440" fetchpriority="high">
+        <img class="hero-img" src="img/intro-02-cad.jpg" alt="CAD model of the Bloc 11 Fourways hall with the wall structures and red plywood spines in place" width="2352" height="1007">
+        <img class="hero-img" src="img/intro-03-cnc.jpg" alt="CNC router cutting plywood wall parts from a full sheet" width="2452" height="1181">
+        <img class="hero-img" src="img/intro-04-installed.jpg" alt="Plywood bouldering walls going up inside the Bloc 11 Fourways shell" width="2560" height="1440">
       </div>
 
       <div class="hero-detail" aria-live="polite">
         <p class="count"><b id="stepNum">01</b><span> / 04</span></p>
-        <p class="label" id="stepCap">Bloc 11 Fourways · The shell, first wall faces going up</p>
+        <p class="label" id="stepCap">Bloc 11 Fourways · Concept model of the hall</p>
         <p class="desc" id="stepDesc">I hand-measured the empty shell, rebuilt it in CAD and sketched the walls at full scale in VR.</p>
       </div>
       <div class="rail" aria-hidden="true"><b id="rail"></b></div>
@@ -58,9 +58,9 @@
         <p class="label">Grivin Roering · Industrial design engineer · Johannesburg</p>
         <h1 class="sr-only">Concept, CAD, CNC, installed.</h1>
           <ol class="steps" aria-hidden="true">
-            <li class="on" aria-hidden="true"><i>01</i>Concept<span class="arrow">&#8599;</span></li>
-            <li aria-hidden="true"><i>02</i>CAD<span class="arrow">&#8599;</span></li>
-            <li aria-hidden="true"><i>03</i>CNC<span class="arrow">&#8599;</span></li>
+            <li class="on" aria-hidden="true"><i>01</i>Concept<span class="arrow"><svg viewBox="0 0 24 24" focusable="false"><path d="M6 18 18 6M8.5 6H18v9.5"/></svg></span></li>
+            <li aria-hidden="true"><i>02</i>CAD<span class="arrow"><svg viewBox="0 0 24 24" focusable="false"><path d="M6 18 18 6M8.5 6H18v9.5"/></svg></span></li>
+            <li aria-hidden="true"><i>03</i>CNC<span class="arrow"><svg viewBox="0 0 24 24" focusable="false"><path d="M6 18 18 6M8.5 6H18v9.5"/></svg></span></li>
             <li aria-hidden="true"><i>04</i>Installed.</li>
           </ol>
       </div>
@@ -308,10 +308,10 @@
   const rail = document.getElementById('rail');
   const hint = document.getElementById('hint');
   const steps = [
-    ['Bloc 11 Fourways · The shell, first wall faces going up', 'I hand-measured the empty shell, rebuilt it in CAD and sketched the walls at full scale in VR.'],
-    ['Bloc 11 Fourways · CAD, spines and wall faces', 'Dimensionally accurate surfaces first, then the structure built off them.'],
-    ['Bloc 11 Fourways · CAD laid over the built wall', 'Every cutting file on the job. I trained the CNC operator before the venue was even settled.'],
-    ['Bloc 11 Fourways · Walls up, matting going in', 'I set the assembly method and corrected on site. 900 m² in under three months.']
+    ['Bloc 11 Fourways · Concept model of the hall', 'I hand-measured the empty shell, rebuilt it in CAD and sketched the walls at full scale in VR.'],
+    ['Bloc 11 Fourways · CAD model, structure and spines', 'Dimensionally accurate surfaces first, then the structure built off them.'],
+    ['Bloc 11 Fourways · CNC cutting the wall parts', 'Every cutting file on the job. I trained the CNC operator before the venue was even settled.'],
+    ['Bloc 11 Fourways · Walls going up in the shell', 'I set the assembly method and corrected on site. 900 m² in under three months.']
   ];
   let current = 0;
   const startInset = () => {
