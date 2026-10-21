@@ -499,7 +499,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 }
 
 /* Project sections as a sticky image sequence */
-.pstory { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(28px, 5vw, 88px); padding-block: 8px clamp(32px, 6vh, 72px); }
+.pstory { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.9fr); gap: clamp(28px, 4vw, 64px); padding-block: 8px clamp(32px, 6vh, 72px); }
 .pstory.flip .pstory-media { order: 2; }
 .pstory-sticky { position: sticky; top: 104px; height: calc(100vh - 128px); height: calc(100svh - 128px); display: flex; flex-direction: column; justify-content: center; gap: 12px; }
 .pstory-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
@@ -509,7 +509,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 .pstory-dots span { display: flex; gap: 3px; }
 .pstory-dots i { display: block; width: 16px; height: 2px; background: var(--rule); transition: background 0.3s; }
 .pstory-dots i.on { background: var(--ink); }
-.pstory-frame { position: relative; width: 100%; aspect-ratio: 5 / 4; max-height: calc(100svh - 220px); overflow: hidden; border-radius: 4px; background: var(--panel); }
+.pstory-frame { position: relative; width: 100%; aspect-ratio: 3 / 2; max-height: calc(100svh - 220px); overflow: hidden; border-radius: 4px; background: var(--panel); }
 .pstory-frame .pf { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: clamp(10px, 1.6vw, 24px);
   opacity: 0; transform: scale(1.035); transition: opacity 0.55s ease, transform 0.9s cubic-bezier(.2,.7,.2,1); }
 .pstory-frame .pf.photo { object-fit: cover; padding: 0; }
@@ -527,7 +527,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   .pch-figs { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 0 18px; padding-bottom: 6px; }
   .pch-fig { flex: 0 0 100%; margin: 0; scroll-snap-align: start; }
   .pch-figs:has(.pch-fig + .pch-fig) .pch-fig { flex-basis: 86%; }
-  .pch-fig div { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 4px; background: var(--panel); }
+  .pch-fig div { aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; background: var(--panel); }
   .pch-fig img { width: 100%; height: 100%; object-fit: cover; }
   .pch-fig.plan img { object-fit: contain; padding: 10px; }
   .pch-fig .label { margin-top: 10px; }
@@ -541,7 +541,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   .pstory.pinned { position: relative; padding: 0; display: block; }
   .pstory.pinned .pstory-stage {
     position: sticky; top: 0; height: 100vh; height: 100svh; padding-block: 104px 24px;
-    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(28px, 5vw, 88px); align-items: center;
+    display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.9fr); gap: clamp(28px, 4vw, 64px); align-items: center;
   }
   .pstory.pinned.flip .pstory-media { order: 2; }
   .pstory.pinned .pstory-sticky { position: static; height: auto; }
@@ -603,4 +603,18 @@ iframe.yt-frame { display: block; border: 0; width: 100%; height: 100%; backgrou
   .pch-figs.mrow .pch-fig div { height: min(52vh, 320px); width: auto; aspect-ratio: var(--ar); background: var(--ink); }
   .pch-figs.mrow .pch-fig img { object-fit: cover; padding: 0; }
   .pch-figs.mrow .pch-fig .yt, .pch-figs.mrow .pch-fig iframe { width: 100%; height: 100%; }
+}
+
+/* Outlined numbers: render on their own layer so Windows draws the outline with smooth
+   greyscale edges instead of ClearType colour fringes */
+.proj-num, .card-num, .steps li { will-change: transform; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.proj-num { -webkit-text-stroke-width: 2px; }
+
+/* Wider media column; flipped sections mirror the column widths */
+.pstory.flip { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.45fr); }
+@media (min-width: 900px) {
+  .pstory.pinned.flip .pstory-stage { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.45fr); }
+}
+@media (max-width: 899px) {
+  .pstory.flip { grid-template-columns: minmax(0, 1fr); }
 }
