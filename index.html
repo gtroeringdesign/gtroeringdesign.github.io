@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
-<link rel="stylesheet" href="site.css?v=6">
+<link rel="stylesheet" href="site.css?v=8">
 <style>
   :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
   [hidden] { display: none !important; }
@@ -267,20 +267,30 @@
     <div class="contact-rows">
       <div class="row">
         <span class="label">Email</span>
-        <span class="val" id="email">gtroeringdesign@gmail.com</span>
+        <span class="val" id="email" data-x="Z3Ryb2VyaW5nZGVzaWduQGdtYWlsLmNvbQ=="></span>
         <button type="button" id="copyEmail">Copy</button>
       </div>
       <div class="row">
         <span class="label">WhatsApp</span>
-        <span class="val">+27 76 090 8981</span>
-        <a class="go" href="https://wa.me/27760908981">Message</a>
+        <span class="val" data-x="KzI3IDc2IDA5MCA4OTgx"></span>
+        <a class="go" href="#" data-wa="Mjc3NjA5MDg5ODE=">Message</a>
       </div>
       <div class="row">
         <span class="label">LinkedIn</span>
         <span class="val">gtroering-design</span>
         <a class="go" href="https://www.linkedin.com/in/gtroering-design">Open</a>
       </div>
+      <div class="row">
+        <span class="label">CV</span>
+        <span class="val">Grivin Roering, PDF</span>
+        <a class="go" href="Grivin-Roering-CV.pdf" download>Download</a>
+      </div>
     </div>
+    <script>
+      /* Email and number are stored encoded so simple scrapers reading the page code miss them */
+      document.querySelectorAll('[data-x]').forEach(e => e.textContent = atob(e.dataset.x));
+      document.querySelectorAll('[data-wa]').forEach(a => a.href = 'https://wa.me/' + atob(a.dataset.wa));
+    </script>
     <div class="foot">
       <p class="label">© 2026 Grivin Roering · GTRoering Design · Johannesburg, ZA · gtroeringdesign.work</p>
       <p class="label">Project imagery used with permission. All rights reserved.</p>
@@ -385,7 +395,7 @@
   const wide = matchMedia('(min-width: 900px)');
   let pinned = false, dist = 0;
   function layoutWork() {
-    pinned = wide.matches && !reduce;
+    pinned = !reduce;
     work.classList.toggle('is-pinned', pinned);
     if (!pinned) { work.style.height = ''; track.style.transform = ''; return; }
     // Stop when the last panel's right edge sits one gutter in from the screen edge.

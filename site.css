@@ -651,3 +651,38 @@ iframe.yt-frame { display: block; border: 0; width: 100%; height: 100%; backgrou
   .pch-figs.mrow .pch-fig div { max-height: none; }
 }
 @media (prefers-reduced-motion: reduce) { .pstory.pinned .pstory-frame { transition: none; } }
+
+/* Download CV button (About intro) */
+.cv-btn { display: inline-block; margin-top: clamp(24px, 4vh, 36px); font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none; border: 1px solid var(--ink); border-radius: 999px; padding: 12px 20px; transition: background 0.25s, color 0.25s, border-color 0.25s; }
+.cv-btn:hover { background: var(--signal); border-color: var(--signal); color: #fff; }
+
+/* Phone scroll motion (classes added by mobile-motion.js, so nothing hides without it) */
+@media (max-width: 899px) {
+  .m-anim .pch-fig > div, .m-anim .chapter-fig > div {
+    clip-path: inset(0 100% 0 0); transition: clip-path 0.95s cubic-bezier(.7, 0, .2, 1); }
+  .m-anim .pch-fig > div img, .m-anim .chapter-fig > div img { transform: scale(1.08); transition: transform 1.3s cubic-bezier(.2, .7, .2, 1); }
+  .m-anim .pch-fig.m-in > div, .m-anim .chapter-fig.m-in > div { clip-path: inset(0); }
+  .m-anim .pch-fig.m-in > div img, .m-anim .chapter-fig.m-in > div img { transform: none; }
+  .m-anim .pch-fig figcaption, .m-anim .chapter-fig figcaption { opacity: 0; transition: opacity 0.6s ease 0.5s; }
+  .m-anim .m-in figcaption { opacity: 1; }
+
+  .m-anim .uffb-body p, .m-anim .uffb-head, .m-anim .chapter .label, .m-anim .chapter p.t {
+    opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.8s cubic-bezier(.2, .7, .2, 1); }
+  .m-anim .m-in.uffb-head, .m-anim .uffb-body p.m-in, .m-anim .chapter .label.m-in, .m-anim .chapter p.t.m-in { opacity: 1; transform: none; }
+  .uffb-head.m-in::after { transform: none; }
+
+  .m-anim .proj-open .proj-num, .m-anim .proj-open h2 { font-stretch: 62%; transition: font-stretch 1.2s cubic-bezier(.2, .7, .2, 1); }
+  .m-anim .proj-open.m-in .proj-num, .m-anim .proj-open.m-in h2 { font-stretch: 125%; }
+}
+
+/* Intro project cards slide sideways on phones too */
+@media (max-width: 899px) {
+  .work.is-pinned .work-track { padding-top: 48px; gap: 20px; }
+  .work.is-pinned .work-intro { width: 78vw; }
+  .work.is-pinned .card { width: 84vw; }
+  .work.is-pinned .work-outro { width: 78vw; }
+  .work.is-pinned .card-body { grid-template-columns: auto minmax(0, 1fr); gap: 8px 14px; }
+  .work.is-pinned .card .usp { display: none; }
+  .work.is-pinned .work-progress { left: 16px; right: 16px; }
+}
