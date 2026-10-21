@@ -510,10 +510,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 .pstory-dots i { display: block; width: 16px; height: 2px; background: var(--rule); transition: background 0.3s; }
 .pstory-dots i.on { background: var(--ink); }
 .pstory-frame { position: relative; width: 100%; aspect-ratio: 5 / 4; max-height: calc(100svh - 220px); overflow: hidden; border-radius: 4px; background: var(--panel); }
-.pstory-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: clamp(10px, 1.6vw, 24px);
+.pstory-frame .pf { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: clamp(10px, 1.6vw, 24px);
   opacity: 0; transform: scale(1.035); transition: opacity 0.55s ease, transform 0.9s cubic-bezier(.2,.7,.2,1); }
-.pstory-frame img.photo { object-fit: cover; padding: 0; }
-.pstory-frame img.on { opacity: 1; transform: none; }
+.pstory-frame .pf.photo { object-fit: cover; padding: 0; }
+.pstory-frame .pf.on { opacity: 1; transform: none; }
 .pstory-cap { min-height: 1.5em; }
 .pstory-text { padding-block: 10vh 14vh; min-width: 0; }
 .pch { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; padding-block: 40px; opacity: 0.3; transition: opacity 0.5s ease; }
@@ -533,7 +533,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   .pch-fig .label { margin-top: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pstory-frame img, .pch { transition: none; }
+  .pstory-frame .pf, .pch { transition: none; }
 }
 
 /* Held sections (wide screens): image wipes, text fades, nothing slides */
@@ -546,11 +546,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   .pstory.pinned.flip .pstory-media { order: 2; }
   .pstory.pinned .pstory-sticky { position: static; height: auto; }
   .pstory.pinned .pstory-frame { max-height: calc(100svh - 200px); }
-  .pstory.pinned .pstory-frame img { opacity: 1; transform: none; clip-path: inset(0 0 0 100%); z-index: 1; background: var(--panel);
+  .pstory.pinned .pstory-frame .pf { opacity: 1; transform: none; clip-path: inset(0 0 0 100%); z-index: 1; background: var(--panel);
     transition: clip-path 0.85s cubic-bezier(.7, 0, .2, 1); }
   .pstory.pinned .pstory-frame[data-dir="back"] img { clip-path: inset(0 100% 0 0); }
-  .pstory.pinned .pstory-frame img.on { clip-path: inset(0); z-index: 3; }
-  .pstory.pinned .pstory-frame img.was { clip-path: inset(0); z-index: 2; transition: none; }
+  .pstory.pinned .pstory-frame .pf.on { clip-path: inset(0); z-index: 3; }
+  .pstory.pinned .pstory-frame .pf.was { clip-path: inset(0); z-index: 2; transition: none; }
   .pstory.pinned .pstory-text { padding: 0; display: grid; align-items: center; max-height: calc(100svh - 140px); }
   .pstory.pinned .pch {
     grid-area: 1 / 1; min-height: 0; padding: 0; max-height: calc(100svh - 150px); overflow: auto;
@@ -564,5 +564,43 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   .pstory.pinned .uffb-body p { font-size: 15px; line-height: 1.6; }
 }
 @media (min-width: 900px) and (prefers-reduced-motion: reduce) {
-  .pstory.pinned .pstory-frame img, .pstory.pinned .pch, .pstory.pinned .pch.on { transition: none; filter: none; }
+  .pstory.pinned .pstory-frame .pf, .pstory.pinned .pch, .pstory.pinned .pch.on { transition: none; filter: none; }
+}
+
+/* About story: whole image on a panel instead of cropping (drawings, tall or wide pieces) */
+.story-frame img.fit { object-fit: contain; background: var(--panel); }
+@media (max-width: 899px) { .chapter-fig img.fit { object-fit: contain; } }
+
+/* Project section media: images, YouTube stills and rows of media */
+.pstory-frame .pf > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.pstory-frame .pf.photo > img { object-fit: cover; }
+.pstory-frame .pf.video { padding: 0; display: grid; place-items: center; background: var(--ink); }
+.pstory-frame .pf.video > .yt, .pstory-frame .pf.video > iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; }
+.pstory-frame .pf.mrow { display: flex; align-items: center; justify-content: center; }
+.pf-row { display: flex; gap: clamp(8px, 1vw, 14px); width: 100%; align-items: flex-start; justify-content: center; }
+.pf-row .tile { margin: 0; min-width: 0; flex: var(--ar) 1 0; }
+.pf-row .tile > div { aspect-ratio: var(--ar); overflow: hidden; border-radius: 3px; background: var(--ink); }
+.pf-row .tile > div > img, .pf-row .tile .yt, .pf-row .tile iframe { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pf-row .tile figcaption { margin-top: 8px; }
+
+.yt { position: relative; display: block; padding: 0; border: 0; margin: 0; background: var(--ink); cursor: pointer; overflow: hidden; }
+.yt img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2,.7,.2,1), opacity 0.3s; }
+.yt .play { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: var(--signal); box-shadow: 0 6px 24px rgba(0,0,0,0.25); transition: transform 0.3s; }
+.yt .play::after { content: ""; position: absolute; left: 26px; top: 21px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent #fff; }
+.yt:hover img { transform: scale(1.03); }
+.yt:hover .play { transform: scale(1.08); }
+.yt:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+.tile .yt .play { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+.tile .yt .play::after { left: 19px; top: 15px; border-width: 9px 0 9px 14px; }
+iframe.yt-frame { display: block; border: 0; width: 100%; height: 100%; background: #000; }
+
+.uffb-body a.more { color: var(--signal-ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+
+@media (max-width: 899px) {
+  .pch-fig.video div { aspect-ratio: 16 / 9; background: var(--ink); }
+  .pch-fig.video .yt, .pch-fig.video iframe { width: 100%; height: 100%; }
+  .pch-figs.mrow .pch-fig { flex: 0 0 auto; }
+  .pch-figs.mrow .pch-fig div { height: min(52vh, 320px); width: auto; aspect-ratio: var(--ar); background: var(--ink); }
+  .pch-figs.mrow .pch-fig img { object-fit: cover; padding: 0; }
+  .pch-figs.mrow .pch-fig .yt, .pch-figs.mrow .pch-fig iframe { width: 100%; height: 100%; }
 }
