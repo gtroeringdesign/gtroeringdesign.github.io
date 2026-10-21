@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
-<link rel="stylesheet" href="site.css?v=4">
+<link rel="stylesheet" href="site.css?v=5">
 <style>
   :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
   [hidden] { display: none !important; }
@@ -249,6 +249,22 @@
     chapters.forEach((c, i) => c.classList.toggle('on', i === best));
     storyImgs.forEach((im, i) => im.classList.toggle('on', i === best));
     storyCap.textContent = chapters[best].dataset.cap;
+    sizeFrame();
+  }
+
+  /* Frame follows the shape of the current image */
+  const sframe = document.getElementById('storyFrame');
+  const smedia = sframe.parentElement;
+  function sizeFrame() {
+    if (innerWidth < 900) { sframe.style.width = sframe.style.height = ''; return; }
+    const im = storyImgs[active];
+    const ar = (+im.getAttribute('width')) / (+im.getAttribute('height'));
+    const maxW = smedia.clientWidth;
+    const maxH = Math.min(vh() * 0.74, smedia.clientHeight - 88 - 40 - 40);
+    let w = maxW, h = w / ar;
+    if (h > maxH) { h = maxH; w = h * ar; }
+    sframe.style.width = Math.round(w) + 'px';
+    sframe.style.height = Math.round(h) + 'px';
   }
 
   /* Ticker: rows slide in opposite directions with scroll */
@@ -287,8 +303,8 @@
   let ticking = false;
   const frame = () => { ticking = false; portraitFrame(); storyFrame(); tickerFrame(); };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
-  addEventListener('resize', frame);
-  frame();
+  addEventListener('resize', () => { frame(); sizeFrame(); });
+  frame(); sizeFrame();
 })();
 </script>
 </body>
